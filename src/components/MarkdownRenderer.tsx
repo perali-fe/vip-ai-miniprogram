@@ -1,13 +1,13 @@
 'use client';
 
+import 'katex/dist/katex.min.css';
+
+import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import ReactMarkdown from 'react-markdown';
+import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-
-import 'katex/dist/katex.min.css';
 
 interface MarkdownRendererProps {
   content: string;

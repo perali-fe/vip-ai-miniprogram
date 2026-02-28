@@ -1,9 +1,9 @@
 'use client';
 
 import { MessageOutlined, RobotOutlined, SendOutlined, StopOutlined } from '@ant-design/icons';
-import { Button, Input, Layout, Typography, message } from 'antd';
+import { Button, Input, Layout, message,Typography } from 'antd';
 import { motion } from 'framer-motion';
-import { useState, useCallback } from 'react';
+import { useCallback,useState } from 'react';
 
 import ChatInterface from '@/components/ChatInterface';
 import { useStreamChat } from '@/hooks/useStreamChat';
@@ -117,50 +117,50 @@ export default function Home() {
     : messages;
 
   return (
-    <Layout className=\"min-h-screen\">
-      <Header className=\"bg-white shadow-sm border-b\">
-        <div className=\"flex items-center justify-between h-full\">
-          <div className=\"flex items-center gap-3\">
+    <Layout className="min-h-screen">
+      <Header className="bg-white shadow-sm border-b">
+        <div className="flex items-center justify-between h-full">
+          <div className="flex items-center gap-3">
             <motion.div
               animate={{ rotate: isLoading ? 360 : 0 }}
               transition={{ 
                 duration: 2, 
                 repeat: isLoading ? Infinity : 0, 
-                ease: \"linear\" 
+                ease: "linear" 
               }}
             >
-              <RobotOutlined className=\"text-2xl text-blue-500\" />
+              <RobotOutlined className="text-2xl text-blue-500" />
             </motion.div>
-            <Title level={3} className=\"!mb-0 !text-gray-800\">
+            <Title level={3} className="!mb-0 !text-gray-800">
               VIP AI 助手
             </Title>
             {isLoading && (
-              <span className=\"text-sm text-green-500 animate-pulse\">
+              <span className="text-sm text-green-500 animate-pulse">
                 正在思考中...
               </span>
             )}
           </div>
-          <MessageOutlined className=\"text-xl text-gray-600\" />
+          <MessageOutlined className="text-xl text-gray-600" />
         </div>
       </Header>
       
-      <Content className=\"flex-1 flex flex-col\">
-        <div className=\"flex-1 flex flex-col max-w-4xl mx-auto w-full\">
+      <Content className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
           <ChatInterface 
             messages={displayMessages}
             isLoading={isLoading}
             streamingMessageId={currentStreamingMessage?.id}
           />
           
-          <div className=\"p-4 bg-white border-t\">
-            <div className=\"flex gap-2 items-end\">
+          <div className="p-4 bg-white border-t">
+            <div className="flex gap-2 items-end">
               <TextArea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder=\"输入您的问题...\"
+                placeholder="输入您的问题..."
                 autoSize={{ minRows: 1, maxRows: 4 }}
-                className=\"flex-1\"
+                className="flex-1"
                 disabled={isLoading}
               />
               
@@ -169,17 +169,17 @@ export default function Home() {
                   danger
                   icon={<StopOutlined />}
                   onClick={handleStopGeneration}
-                  size=\"large\"
+                  size="large"
                 >
                   停止
                 </Button>
               ) : (
                 <Button
-                  type=\"primary\"
+                  type="primary"
                   icon={<SendOutlined />}
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim()}
-                  size=\"large\"
+                  size="large"
                 >
                   发送
                 </Button>

@@ -5,9 +5,10 @@ import { Avatar, Card, Empty, Spin } from 'antd';
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
+import { Message } from '@/types/chat';
+
 import MarkdownRenderer from './MarkdownRenderer';
 import TypewriterText from './TypewriterText';
-import { Message } from '@/types/chat';
 
 interface ChatInterfaceProps {
   messages: Message[];
@@ -32,18 +33,18 @@ export default function ChatInterface({
 
   if (messages.length === 0 && !isLoading) {
     return (
-      <div className=\"flex-1 flex items-center justify-center p-8\">
+      <div className="flex-1 flex items-center justify-center p-8">
         <Empty
-          image={<RobotOutlined className=\"text-6xl text-gray-300\" />}
+          image={<RobotOutlined className="text-6xl text-gray-300" />}
           description={
-            <div className=\"text-center\">
-              <p className=\"text-lg font-medium text-gray-600 mb-2\">
+            <div className="text-center">
+              <p className="text-lg font-medium text-gray-600 mb-2">
                 欢迎使用 VIP AI 助手
               </p>
-              <p className=\"text-gray-400\">
+              <p className="text-gray-400">
                 我可以帮您解答问题、编写代码、翻译文本等
               </p>
-              <p className=\"text-sm text-blue-500 mt-2\">
+              <p className="text-sm text-blue-500 mt-2">
                 ✨ 现在支持实时流式响应！
               </p>
             </div>
@@ -54,7 +55,7 @@ export default function ChatInterface({
   }
 
   return (
-    <div className=\"flex-1 overflow-y-auto p-4 space-y-4\">
+    <div className="flex-1 overflow-y-auto p-4 space-y-4">
       {messages.map((message, index) => {
         const isStreaming = streamingMessageId === message.id;
         
@@ -85,35 +86,35 @@ export default function ChatInterface({
               }`}
               bodyStyle={{ padding: '12px 16px' }}
             >
-              <div className=\"text-sm text-gray-500 mb-1 flex items-center gap-2\">
+              <div className="text-sm text-gray-500 mb-1 flex items-center gap-2">
                 <span>
                   {message.role === 'user' ? '您' : 'AI助手'}
                 </span>
                 {isStreaming && (
-                  <div className=\"flex items-center gap-1\">
-                    <div className=\"w-2 h-2 bg-green-500 rounded-full animate-pulse\"></div>
-                    <span className=\"text-green-600\">正在回复...</span>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-green-600">正在回复...</span>
                   </div>
                 )}
-                <span className=\"ml-auto\">
+                <span className="ml-auto">
                   {message.timestamp.toLocaleTimeString()}
                 </span>
               </div>
               
               {message.role === 'assistant' ? (
-                <div className=\"prose prose-sm max-w-none\">
+                <div className="prose prose-sm max-w-none">
                   {isStreaming ? (
-                    <div className=\"min-h-[20px]\">
+                    <div className="min-h-[20px]">
                       {message.content ? (
                         <MarkdownRenderer content={message.content} />
                       ) : (
-                        <div className=\"flex items-center gap-2 text-gray-500\">
-                          <Spin size=\"small\" />
+                        <div className="flex items-center gap-2 text-gray-500">
+                          <Spin size="small" />
                           <span>思考中...</span>
                         </div>
                       )}
                       {message.content && (
-                        <span className=\"inline-block w-2 h-5 bg-green-500 animate-pulse ml-1 align-bottom\"></span>
+                        <span className="inline-block w-2 h-5 bg-green-500 animate-pulse ml-1 align-bottom"></span>
                       )}
                     </div>
                   ) : (
@@ -121,7 +122,7 @@ export default function ChatInterface({
                   )}
                 </div>
               ) : (
-                <div className=\"whitespace-pre-wrap\">{message.content}</div>
+                <div className="whitespace-pre-wrap">{message.content}</div>
               )}
             </Card>
           </motion.div>
